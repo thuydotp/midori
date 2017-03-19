@@ -1,0 +1,47 @@
+<div class="container">
+    <h2>Midori Post</h2>
+    <div class="create-post-block">
+        <div>
+            <textarea placeholder="What are in your mind?" #newPost></textarea>
+        </div>
+        <button (click)="createPost(newPost.value)">Post</button>
+    </div>
+
+    <div class="post-list">
+        <div class="post-item" *ngFor="let post of postList;">
+            <div><a href="#">{{post.author}}</a></div>
+            <sub>{{post.createdDate}}</sub>
+            <p>{{post.content}}</p>            
+            <div>
+                <button (click)="deletePost(post)">Delete</button>
+                <button (click)="showEditModal(post)">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" [style.display]="editMode ? 'block' : 'none'">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" (click)="toggleEditModal(false)">&times;</span>
+            <h2>Edit Post</h2>
+        </div>
+    <div class="modal-body">
+        <div class="create-post-block">
+            <div>
+                <textarea placeholder="What are in your mind?" [(ngModel)]="editedPost.content"></textarea>
+                <div>
+                    <span class="error-text">{{editError}}</span>
+                </div>
+            </div>
+            <button (click)="editPost()">Save Changes</button>
+            <button (click)="cancelEdit()">Cancel</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <h3>Modal Footer</h3>
+    </div>
+    </div>
+</div>
